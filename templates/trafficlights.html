@@ -1,0 +1,38 @@
+<html>
+<head>
+  <title>Traffic lights</title>
+
+</head>
+
+<script>
+  var ctx;
+  
+  var cwidth = 200;
+  var cheight = 600;
+  var boxx = 50;
+  var boxy = 50;
+  var boxwidth = 100;
+  var boxheight = 100;
+  var lightrad = 80;
+    
+  function init():
+  {
+    ctx = document.getElementById('canvas').getContext('2d');
+    ctx.lineWidth = 5;
+    ctx.clearRect(boxx, boxy, boxwidth, boxheight);
+    ctx.strokeRect(boxx, boxy, boxwidth, boxheight);
+    ctx.fillStyle = "#009966";
+  }
+  
+</script>
+    
+<body onLoad="init();">
+  <h1>Traffic lights control panel</h1>
+
+<canvas id="canvas" width="200" height="600">
+  Your browser doesn't support an HTML5 canvas.
+</canvas>
+
+
+</body>
+</html>
