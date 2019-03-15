@@ -4,36 +4,49 @@
 
 </head>
 
-<script>
-  var ctx;
-  
-  var cwidth = 200;
-  var cheight = 600;
-  var boxx = 50;
-  var boxy = 50;
-  var boxwidth = 100;
-  var boxheight = 100;
-  var lightrad = 80;
+
     
-  function init():
+<body onLoad="init();">
+  <h1 id="mainheader">Traffic lights control panel</h1>
+  <p id="para"></p>
+
+<svg id="svg1" width="180" height="500" style="border:3px solid #000000">
+  <circle id="redlight" cx="90" cy="100" r="50" stroke="black" stroke-width="3" fill="grey" onclick="changelight('red');" />
+  <circle id="amberlight" cx="90" cy="250" r="50" stroke="black" stroke-width="3" fill="grey"  onclick="changelight('amber');"/>
+  <circle id="greenlight" cx="90" cy="400" r="50" stroke="black" stroke-width="3" fill="green"  onclick="changelight('green');"/>
+</svg>
+
+<script>
+
+  function init()
   {
-    ctx = document.getElementById('canvas').getContext('2d');
-    ctx.lineWidth = 5;
-    ctx.clearRect(boxx, boxy, boxwidth, boxheight);
-    ctx.strokeRect(boxx, boxy, boxwidth, boxheight);
-    ctx.fillStyle = "#009966";
+    document.getElementById("para.innerHTML") = "Hello";
+  }
+  
+  var lightstate   = {"red": false, "amber": false, "green": true};
+  var colourmap = {"red": "red",
+                   "amber": "orange",
+                   "green": "green"
+                   "off": "grey"};
+  
+  function changelight(colour)
+  {
+    document.getElementById("mainheader").innerHTML = "Changing " + colour + " light";
+    var currentlight = document.getElementById(colour + "light");
+        
+    if (lightstate[colour]):
+    {
+      /* Light currently on, turn it off. */
+      redon = false;
+      currentlight.setAttribute("fill", colourmap["off"]);
+    }
+    else
+    {
+      /* Light currently off, turn it on. */
+      currentlight.setAttribute("fill", colourmap[colour]);
   }
   
 </script>
-    
-<body onLoad="init();">
-  <h1>Traffic lights control panel</h1>
-
-<canvas id="canvas" width="200" height="600">
-  Your browser doesn't support an HTML5 canvas.
-</canvas>
-
-<button onClick="redon();">Red on</button>
 
 </body>
 </html>
