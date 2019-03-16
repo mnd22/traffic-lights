@@ -2,6 +2,15 @@
 <head>
   <title>Traffic lights</title>
 
+<script>
+  function init()
+  {
+    document.getElementById("para").innerHTML = "Click the lights to turn on/off";
+  }
+
+</script>
+  
+
 </head>
 
 
@@ -18,32 +27,29 @@
 
 <script>
 
-  function init()
-  {
-    document.getElementById("para.innerHTML") = "Hello";
-  }
-  
+
   var lightstate   = {"red": false, "amber": false, "green": true};
   var colourmap = {"red": "red",
                    "amber": "orange",
-                   "green": "green"
+                   "green": "green",
                    "off": "grey"};
   
   function changelight(colour)
   {
-    document.getElementById("mainheader").innerHTML = "Changing " + colour + " light";
     var currentlight = document.getElementById(colour + "light");
         
-    if (lightstate[colour]):
+    if (lightstate[colour])
     {
       /* Light currently on, turn it off. */
-      redon = false;
+      lightstate[colour] = false;
       currentlight.setAttribute("fill", colourmap["off"]);
     }
     else
     {
       /* Light currently off, turn it on. */
+      lightstate[colour] = true;
       currentlight.setAttribute("fill", colourmap[colour]);
+    }
   }
   
 </script>
