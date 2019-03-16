@@ -26,7 +26,8 @@ def trafficlightsapi(colour):
   else:
     colour = "Input not understood"
       
-  return colour
+  return render_template('trafficlightsbasic.html', 
+                          currentcolour = colour)
 
 @app.route('/trafficlights')
 def trafficlights():

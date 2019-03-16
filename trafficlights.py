@@ -8,7 +8,7 @@ red = LED(17)
 
 def main():
   print("Starting lights cycle")
-  cyclelights(3, 3, 1, 3)
+  cyclelights(50, 3, 1, 3)
   print("Lights cycle complete")
 
 def cyclelights(numcycles = 5,
