@@ -28,12 +28,40 @@
 <script>
 
 
-  var lightstate   = {"red": false, "amber": false, "green": true};
+  var lightstate = {"red": false, "amber": false, "green": true};
   var colourmap = {"red": "red",
                    "amber": "orange",
                    "green": "green",
                    "off": "grey"};
-  
+ 
+  window.addEventListener( "keypress", doKeyDown, false )
+
+  function doKeyDown(keystroke)
+  {
+    switch(keystroke.keyCode)
+    {
+      case 82:
+        changelight("red");
+        alert("red");
+        break;
+      case 114:
+        changelight("red");
+        break;
+      case 85:
+        changelight("amber");
+        break;
+      case 97:
+        changelight("amber");
+        break;
+      case 71:
+        changelight("green");
+        break;
+      case 103:
+        changelight("green");
+        break;
+    }
+  }
+ 
   function changelight(colour)
   {
     var currentlight = document.getElementById(colour + "light");
@@ -50,6 +78,11 @@
       lightstate[colour] = true;
       currentlight.setAttribute("fill", colourmap[colour]);
     }
+  }
+  
+  function cycleLights()
+  {
+    
   }
   
 </script>
