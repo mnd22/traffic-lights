@@ -27,22 +27,30 @@
 
 <script>
 
-
   var lightstate = {"red": false, "amber": false, "green": true};
+  
   var colourmap = {"red": "red",
                    "amber": "orange",
                    "green": "green",
                    "off": "grey"};
+  
+  var cyclestates = {"red": {"red": true, "amber": false, "green": false},
+                     "amber-red": {"red": true, "amber": true, "green": false},
+                     "green": {"red": false, "amber": false, "green": true},
+                     "amber": {"red": false, "amber": true, "green": false}
+                    };
+  var cyclestate = "green";
  
-  window.addEventListener( "keypress", doKeyDown, false )
+  window.addEventListener( "keypress", doKeyDown, false);
 
   function doKeyDown(keystroke)
   {
+    /*alert(keystroke.keyCode);*/
+
     switch(keystroke.keyCode)
     {
       case 82:
         changelight("red");
-        alert("red");
         break;
       case 114:
         changelight("red");
@@ -59,30 +67,72 @@
       case 103:
         changelight("green");
         break;
+      case 13:
+        nextstate();      
     }
   }
  
   function changelight(colour)
   {
-    var currentlight = document.getElementById(colour + "light");
-        
     if (lightstate[colour])
     {
       /* Light currently on, turn it off. */
-      lightstate[colour] = false;
-      currentlight.setAttribute("fill", colourmap["off"]);
+      setlight(colour, false);
     }
     else
     {
       /* Light currently off, turn it on. */
-      lightstate[colour] = true;
-      currentlight.setAttribute("fill", colourmap[colour]);
+      setlight(colour, true);      
     }
+    
   }
   
-  function cycleLights()
+  function setlight(colour, state)
   {
-    
+    /* Set state of specified light to on (true) or off (false) */ 
+    var currentlight = document.getElementById(colour + "light");
+    if (state)
+    {
+      currentlight.setAttribute("fill", colourmap[colour]);
+    }
+    else
+    {
+      currentlight.setAttribute("fill", colourmap["off"]);
+    }
+
+    lightstate[colour] = state;
+  }
+
+  function nextstate()
+  {
+    switch(cyclestate)
+    {
+      case "green":
+        cyclestate = "amber";
+        setlight("green", false);
+        setlight("amber", true);
+        break;
+      case "amber":
+        cyclestate = "red";
+        setlight("amber", false);
+        setlight("red", true);
+        break;
+      case "red":
+        cyclestate = "redamber";
+        setlight("amber", true);
+        break;
+      case "redamber":
+        cyclestate = "green";
+        setlight("green", true);
+        setlight("amber", false);
+        setlight("red", false);
+        break;
+      default:
+        cyclestate = "red";
+        setlight("green", false);
+        setlight("amber", false);
+        setlight("red", true);
+    }
   }
   
 </script>
