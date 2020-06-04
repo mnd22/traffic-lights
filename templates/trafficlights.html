@@ -5,7 +5,7 @@
 <script>
   function init()
   {
-    document.getElementById("para").innerHTML = "Click the lights to turn on/off";
+    document.getElementById("para").innerHTML = "Click the lights to turn them on/off individually, Next to cycle states.";
   }
 
 </script>
@@ -18,7 +18,10 @@
 <body onLoad="init();">
   <h1 id="mainheader">Traffic lights control panel</h1>
   <p id="para"></p>
-
+  <button onclick="nextstate()">Next</button>
+  <button onclick="cycletimer = setInterval(nextstate, 3000)">Cycle lights</button>
+  <button onclick="clearInterval(cycletimer)">Stop cycling</button>
+  <br><br>
 <svg id="svg1" width="180" height="500" style="border:3px solid #000000">
   <circle id="redlight" cx="90" cy="100" r="50" stroke="black" stroke-width="3" fill="grey" onclick="changelight('red');" />
   <circle id="amberlight" cx="90" cy="250" r="50" stroke="black" stroke-width="3" fill="grey"  onclick="changelight('amber');"/>
@@ -33,12 +36,7 @@
                    "amber": "orange",
                    "green": "green",
                    "off": "grey"};
-  
-  var cyclestates = {"red": {"red": true, "amber": false, "green": false},
-                     "amber-red": {"red": true, "amber": true, "green": false},
-                     "green": {"red": false, "amber": false, "green": true},
-                     "amber": {"red": false, "amber": true, "green": false}
-                    };
+  /* Allowed values: green, amber, red, redamber, other*/ 
   var cyclestate = "green";
  
   window.addEventListener( "keypress", doKeyDown, false);
@@ -55,7 +53,7 @@
       case 114:
         changelight("red");
         break;
-      case 85:
+      case 65:
         changelight("amber");
         break;
       case 97:
@@ -84,7 +82,7 @@
       /* Light currently off, turn it on. */
       setlight(colour, true);      
     }
-    
+    cyclestate = "other"; 
   }
   
   function setlight(colour, state)
