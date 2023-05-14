@@ -5,6 +5,7 @@ from time import sleep
 green = LED(27)
 amber = LED(22)
 red = LED(17)
+blue = LED(5)
 
 def main():
   print("Starting lights cycle")
@@ -47,12 +48,20 @@ def redamber():
   amber.on()
   red.on()
 
+def allflash():
+  while True:
+    allon()
+    sleep(0.2)
+    alloff()
+    sleep(0.2)
+
 def greenonly():
   amber.off()
   red.off()
   green.on()
 
 def amberonly():
+  blue.off()
   green.off()
   red.off()
   amber.on()
@@ -61,6 +70,25 @@ def alloff():
   green.off()
   red.off()
   amber.off()
+  blue.off()
+
+
+def ey():
+  red.off()
+  green.off()
+  amber.off()
+
+  while True:
+    blue.on()
+    sleep(0.2)
+    blue.off()
+    sleep(0.2)
+
+def allon():
+   green.on()
+   blue.on()
+   red.on()
+   amber.on()  
 
 def flash_forever():
   print("Starting to flash")
@@ -71,14 +99,14 @@ def flash_forever():
       sleep(1)
       red.off()
       sleep(1)
-      yellow.on()
+      amber.on()
       sleep(1)
-      yellow.off()
+      amber.off()
       sleep(1)
-      yellow.on()
+      amber.on()
       red.on()
       sleep(1)
-      yellow.off()
+      amber.off()
       red.off()
       sleep(1)
   except KeyboardInterrupt:
