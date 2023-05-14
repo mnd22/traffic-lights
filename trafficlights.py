@@ -60,6 +60,21 @@ def greenonly():
   red.off()
   green.on()
 
+
+def redflash(T = 0.2):
+  alloff()
+  while True:
+    red.toggle()
+    sleep(T)
+
+
+
+
+
+
+
+
+
 def amberonly():
   blue.off()
   green.off()
@@ -113,4 +128,4 @@ def flash_forever():
     print("Stopped flashing")
 
 if __name__ == "__main__":
-  main()
+  pass
